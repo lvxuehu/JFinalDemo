@@ -2,6 +2,7 @@ package com.demo.blog;
 
 import com.jfinal.aop.Before;
 import com.jfinal.core.Controller;
+import com.jfinal.plugin.activerecord.Page;
 
 /**
  * BlogController
@@ -9,34 +10,42 @@ import com.jfinal.core.Controller;
  */
 @Before(BlogInterceptor.class)
 public class BlogController extends Controller {
-	public void index() {
-		setAttr("blogPage", Blog.dao.paginate(1, 2).getList());
-		render("blog.jsp");
-	}
-	
-	public void add() {
-	}
-	
-	@Before(BlogValidator.class)
-	public void save() {
-		getModel(Blog.class).save();
-		redirect("/blog");
-	}
-	
-	public void edit() {
-		setAttr("blog", Blog.dao.findById(getParaToInt()));
-	}
-	
-	@Before(BlogValidator.class)
-	public void update() {
-		getModel(Blog.class).update();
-		redirect("/blog");
-	}
-	
-	public void delete() {
-		Blog.dao.deleteById(getParaToInt());
-		redirect("/blog");
-	}
+    public void index() {
+        Integer pageNum = getParaToInt("pageNum");
+        if (pageNum == null || pageNum == 0) {
+            pageNum = 1;
+        }
+
+        Page<Blog> page = Blog.dao.paginate(pageNum, 1);
+        setAttr("page", page);
+
+
+        render("blog.jsp");
+    }
+
+    public void add() {
+    }
+
+    @Before(BlogValidator.class)
+    public void save() {
+        getModel(Blog.class).save();
+        redirect("/blog");
+    }
+
+    public void edit() {
+        setAttr("blog", Blog.dao.findById(getParaToInt()));
+    }
+
+    @Before(BlogValidator.class)
+    public void update() {
+        getModel(Blog.class).update();
+        redirect("/blog");
+    }
+
+    public void delete() {
+        Blog.dao.deleteById(getParaToInt());
+        redirect("/blog");
+    }
 }
 
 
