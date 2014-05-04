@@ -2,6 +2,8 @@ package com.demo.common;
 
 import com.demo.blog.Blog;
 import com.demo.blog.BlogController;
+import com.demo.user.User;
+import com.demo.user.UserController;
 import com.jfinal.config.Constants;
 import com.jfinal.config.Handlers;
 import com.jfinal.config.Interceptors;
@@ -34,6 +36,7 @@ public class DemoConfig extends JFinalConfig {
 	public void configRoute(Routes me) {
 		me.add("/", CommonController.class);
 		me.add("/blog", BlogController.class);
+		me.add("/user", UserController.class);
 	}
 	
 	/**
@@ -48,6 +51,7 @@ public class DemoConfig extends JFinalConfig {
 		ActiveRecordPlugin arp = new ActiveRecordPlugin(c3p0Plugin);
 		me.add(arp);
 		arp.addMapping("blog", Blog.class);	// 映射blog 表到 Blog模型
+        arp.addMapping("user", User.class);
 	}
 	
 	/**

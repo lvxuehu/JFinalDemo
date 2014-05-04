@@ -21,26 +21,28 @@
         </div>
     </div>
     <div class="main">
-        <h1>Blog管理&nbsp;&nbsp;
-            <a href="/blog/add">创建Blog</a> <a href="/user">用户管理</a>
+        <h1>User管理&nbsp;&nbsp;
+            <a href="/user/add">创建User</a>
         </h1>
 
         <div class="table_box">
             <table class="list">
                 <tbody>
                 <tr>
-                    <th width="4%">id</th>
-                    <th width="35%">标题</th>
+                    <th width="20%">用户名</th>
+                    <th width="30%">年龄</th>
+                    <th >地址</th>
                     <th width="12%">操作</th>
                 </tr>
-                <c:forEach items="${page.list}" var="blog">
+                <c:forEach items="${page.list}" var="user">
                     <tr>
                             <%--<td style="text-align:left;"><c:out value="${blog.id}" default=""/></td>--%>
-                        <td style="text-align:left;">${blog.title}</td>
-                        <td style="text-align:left;">${blog.title}</td>
+                        <td style="text-align:left;">${user.username}</td>
+                        <td style="text-align:left;">${user.age}</td>
+                        <td style="text-align:left;">${user.address}</td>
                         <td style="text-align:left;">
-                            &nbsp;&nbsp;<a href="/blog/delete/${blog.id}">删除</a>
-                            &nbsp;&nbsp;<a href="/blog/edit/${blog.id}">修改</a>
+                            &nbsp;&nbsp;<a href="/user/delete/${user.id}">删除</a>
+                            &nbsp;&nbsp;<a href="/user/edit/${user.id}">修改</a>
                         </td>
                     </tr>
                 </c:forEach>
@@ -49,7 +51,7 @@
                     <c:set var="pageSize" scope="request" value="${salaryList.pageSize}"/>
                     <c:set var="totalPage" scope="request" value="${salaryList.totalPage}"/>
                     <c:set var="totalRow" scope="request" value="${salaryList.totalRow}"/>
-                    <c:set var="pageUrl" scope="request" value="${contxt}/blog/?pageNum="/>
+                    <c:set var="pageUrl" scope="request" value="${contxt}/user/?pageNum="/>
                     <jsp:include page="/common/page.jsp"/>
 
                 </div>

@@ -15,11 +15,8 @@ public class BlogController extends Controller {
         if (pageNum == null || pageNum == 0) {
             pageNum = 1;
         }
-
-        Page<Blog> page = Blog.dao.paginate(pageNum, 1);
+        Page<Blog> page = Blog.dao.paginate(pageNum, 4);
         setAttr("page", page);
-
-
         render("blog.jsp");
     }
 
